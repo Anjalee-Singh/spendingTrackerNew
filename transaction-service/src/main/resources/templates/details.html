@@ -1,0 +1,83 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" href="/css/app.css">
+<SCRIPT type="text/javascript">
+	window.history.forward();
+	function noBack() {
+		window.history.forward();
+	}
+</SCRIPT>
+</head>
+<body  onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+
+<form th:action="@{/submitUserExpenseDetails}" th:object="${populateExpenseData}" method="post">
+	<h2>Expense Details</h2>
+	<fieldset>
+	<div id="tabledetails">
+		<table
+			style="width: 80%; float: left; border: 0; cellspacing: 0; cellpadding: 0"
+			class="tables_ui" id="t_draggable2">
+			<caption>
+				<h4>Please select the category of every expense</h4>
+			</caption>
+			<tbody class="t_sortable">
+				<th:block th:each="detail, itemstat:*{details}">
+					<tr>
+						 <td>
+      					<input type="text" id="date" th:field="*{details[__${itemstat.index}__].date}" /></td>
+      					<td>
+						<input type="text" id="description" th:field="*{details[__${itemstat.index}__].description}"/></td>
+						<td>
+						<input type="text" id="amount" th:field="*{details[__${itemstat.index}__].amount}"/></td>
+						<td><select class="form-control" id="selectCategory"
+							name="category">
+								<option value="0">select category</option>
+								<option th:each="category : ${categoryList}"
+									th:value="${category}" th:utext="${category}" />
+						</select></td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	
+	<div onclick="myFunction()">Add Other Expense Category :
+	  <label for="otherCategory"></label>
+      <input type="text" id="otherCategory" name="otherCategory" autofocus="autofocus" placeholder="Add Category"/> <br/>
+      <label for="otherAmount">Amount :</label>
+      <input type="text" id="otherAmount" name="otherAmount" autofocus="autofocus" placeholder="Add Amount"/> <br/>
+      <label for="otherDate">Date :</label>
+      <input type="date" id="otherDate" placeholder="dd.MM.yyyy" name="otherDate" autofocus="autofocus" /> <br/>
+      <input type="hidden" id="phoneNumber" name="phoneNumber" autofocus="autofocus" th:value="${phoneNumber}"/> <br />
+      </div>
+     
+     <div >
+		<input id="confirmButton" class="disabledInput" type="submit"  value="Proceed To Confirm" disabled></input>
+	</div>
+   
+     </fieldset>
+    
+	</form>
+	
+	<form  th:action="@{/logout}" method="post">
+		<div class="container-login100-form-btn m-t-32">
+			<button class="login100-form-btn" type="submit">LogOut</button>
+		</div>
+	</form>
+	
+
+	
+</body>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/details.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</html>

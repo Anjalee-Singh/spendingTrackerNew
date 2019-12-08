@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/js/login.js"></script>
+<title>Login page</title>
+</head>
+<body>
+	<div class="limiter">
+		<div class="container-login100"
+			style="background-image: url('images/icons/bg-01.png');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41"> Account Login </span>
+				<!-- <p th:if="${loginError}" class="error">Wrong phone number or password</p> -->
+				<form id="add-form" class="login100-form validate-form p-b-33 p-t-5">
+      
+      <div class="wrap-input100 validate-input" data-validate = "Enter phonenumber">
+					 <input
+						class="input100 ,wrap-input100 validate-input" type="tel"
+						id="phoneNumber" name="phoneNumber" autofocus="autofocus" placeholder="Phonenumber"/> <br />
+					<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input"
+						data-validate="Enter password">
+						<input class="input100" type="password" id="password"
+							name="password" autofocus="autofocus" placeholder="Password" /> <br />
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="container-login100-form-btn m-t-32">
+						<input id="login" class="login100-form-btn" type="submit" value="Log in" />
+					</div>
+					</form>
+					<form class="login100-form validate-form p-b-33 p-t-5 ,login100-form-btn" id="response_file" th:action="@{/confirm}" th:object="${phoneNumber}" method="post" disabled>
+					
+					<input type="text" name="phoneNumber">
+					
+					</form>
+				
+				<form
+					class="login100-form validate-form p-b-33 p-t-5 ,login100-form-btn"
+					th:action="@{/newUser}" >
+					<div class="container-login100-form-btn m-t-32">
+					<label><b>New User</b></label>
+					</div>
+					<div class="container-login100-form-btn m-t-32">
+						<input class="login100-form-btn" type="submit" value="Sign Up" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+  <head>
+  <!-- Library for Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js" type="text/javascript"></script>
+  <!--Library for Numeric JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js" type="text/javascript"></script>
+  
+<link href="/css/ValidateCalendar.css" rel="stylesheet" type="text/css" />
+<!-- <link href="/css/app.css" rel="stylesheet" type="text/css" /> -->
+<!-- Library for Calendar Validation -->
+  <script src="/Libraries/ValidateCalendar.js" type="text/javascript"></script>
+
+  <title>Graphs at a glance
+</title>
+
+<script type="text/javascript" th:inline="javascript">
+    window.catMap = /*[[${fetchCategoryMap}]]*/ [];
+</script>
+
+</head>
+
+<body>
+  <td>
+    <!-- <select class="form-control" id="selectGraph"
+    name="selectGraph">
+    <option value="0">select graph</option>
+		<option value="1">Yearly</option>
+    <option value="2">Monthly</option>
+    <option value="3">Weekly</option>
+  </select>  
+    </td> -->
+    <br></br>
+  <form th:action="@{/displayGraph}" th:object="${calendarDetails}" method="post">
+      <label for="fromDate" >From date: </label>
+      <input type="date" name="fromDate" required pattern="\d{4}-\d{2}-\d{2}" th:value="${calendarDetails.fromDate}"/> 
+      <span class="validity"></span>
+   
+      
+    <!-- <form th:action="@{/displayGraph}" th:object="${calendarDetails}" method="post">
+     -->  
+  <!-- <label for="fromDate">From date:
+    <input type="date" name="fromDate" required pattern="\d{4}-\d{2}-\d{2}">
+    <span class="validity"></span>
+  </label> -->
+  <!-- <br/>
+  <br/> -->
+&nbsp
+&nbsp
+&nbsp
+&nbsp
+<label for="tillDate" >Till Date: </label>
+      <input type="date" name="tillDate" required pattern="\d{4}-\d{2}-\d{2}" th:value="${calendarDetails.tillDate}" />
+        <span class="validity"></span>
+ 
+  
+  <p>
+    <!-- <button onclick="getElementById('demo')">Display Graphs</button> -->
+     <input type="submit" value="Display graph"/> 
+  </p>
+
+  <!-- <h3> Data from ${calendarDetails.fromDate} to th:value="${calendarDetails.tillDate} is as follows:</h3>
+   -->
+  </form>
+  <br></br>
+  <h1>Pie Chart</h1>
+  <div> 
+
+  
+  <div id="pieDiv" style="float:left">
+  <script src="/js/PieChart.js">
+    // plotting pie chart
+    // src="http://localhost/transaction-service/src/main/resources/static/js/PieChart.js"
+  </script>
+  </div>
+
+    <div id="bubbleDiv" style="float:right">
+  <script src="/js/BubbleGraph.js">
+    // plotting pie chart
+  </script>
+  </div>
+  </div>
+<br>
+</br>
+
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+<!-- <iframe onload="myFunction()" ></iframe> -->
+<div id = "statsDiv">
+
+</div>
+
+
+
+
+ <h1>Bar Graph</h1>
+  <div id="barDiv"> 
+
+ 
+  <!-- <script>
+  document.getElementById("statsDiv").innerHTML = "How are you?";
+  </script> -->
+  <script src="/js/BarGraph.js">
+    // plotting bar graph
+  </script>
+ </div>
+ 
+  
+</body>
+</html>

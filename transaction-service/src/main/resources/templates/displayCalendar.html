@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+  <head>
+  <!-- Library for Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js" type="text/javascript"></script>
+  <!--Library for Numeric JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js" type="text/javascript"></script>
+  
+<link href="/css/ValidateCalendar.css" rel="stylesheet" type="text/css" />
+<!-- Library for Calendar Validation -->
+  <script src="/Libraries/ValidateCalendar.js" type="text/javascript"></script>
+
+
+  <title>display Calendar
+</title>
+</head>
+
+<body>
+ <!-- <td>
+     <select class="form-control" id="selectGraph"
+    name="selectGraph">
+    <option value="0">select graph</option>
+		<option value="1">Yearly</option>
+    <option value="2">Monthly</option>
+    <option value="3">Weekly</option>
+  </select>  
+    </td> -->
+    <br></br>
+  
+    <form th:action="@{/displayGraph}" th:object="${calendarDetails}" method="post">
+      
+  <label for="fromDate">From date: </label>
+    <input type="date" id="fromDate" name="fromDate" required pattern="\d{4}-\d{2}-\d{2}"/>
+    <span class="validity"></span>
+ 
+  <!-- <br/>
+  <br/> -->
+&nbsp
+&nbsp
+&nbsp
+&nbsp
+  <label for="tillDate">Till date: </label>
+    <input type="date"  id="tillDate" name="tillDate" required pattern="\d{4}-\d{2}-\d{2}" />
+    <span class="validity1"></span>
+ 
+  
+  <p> 
+    <!-- <button onclick="getElementById('demo')">Display Graphs</button> -->
+     <input type="submit"  value="Display graph"/> 
+  </p>
+</form>
+  
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="limiter">
+		<div class="container-login100"
+			style="background-image: url('images/icons/bg-01.png');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">Add your details here</span>
+				<form class="login100-form validate-form p-b-33 p-t-5"
+					th:action="@{/confirmEdit}" th:object="${loginForm}" method="post">
+					<div class="wrap-input100 validate-input"
+						data-validate="Enter firstName">
+						<input class="input100 ,wrap-input100 validate-input" type="text"
+							id="firstName" name="firstName" autofocus="autofocus"
+							th:value="${firstName}" readonly="readonly"  /> <br /> <span
+							class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+					<div class="wrap-input100 validate-input"
+						data-validate="Enter lastName">
+						<input class="input100 ,wrap-input100 validate-input" type="text"
+							id="lastName" name="lastName" autofocus="autofocus"
+							th:value="${lastName}"  readonly="readonly" /> <br /> <span
+							class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input"
+						data-validate="Enter phoneNumber">
+						<input class="input100 ,wrap-input100 validate-input" type="text"
+							pattern="[0][789][0-9]{8}" id="phoneNumber" name="phoneNumber"
+							autofocus="autofocus" th:value="${phoneNumber}" readonly="readonly" /> <br />
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+					
+					 <div class="wrap-input100 validate-input" data-validate = "Enter SalaryMonth">
+		<input class="input100 ,wrap-input100 validate-input" type="text"
+						id="salaryMonth" name="salaryMonth" autofocus="autofocus" th:value="${salaryMonth}" required/> <br />
+		<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+		</div>
+      
+      <div class="wrap-input100 validate-input" data-validate = "Enter Salary">
+		<input class="input100 ,wrap-input100 validate-input" type="text"
+						id="salary" name="salary" autofocus="autofocus" th:value="${salary}" required/> <br />
+		<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+		</div>
+      
+      <div class="wrap-input100 validate-input" data-validate = "Enter ThresholdExpense">
+		<input class="input100 ,wrap-input100 validate-input" type="text"
+						id="thresholdExpense" name="thresholdExpense" autofocus="autofocus" th:value="${thresholdExpense}" required/> <br />
+		<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+		</div>
+
+					<input class="login100-form-btn" type="submit" value="Confirm Edit" />
+				</form>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
