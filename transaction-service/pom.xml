@@ -159,6 +159,16 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<plugin>
+              <groupId>com.heroku.sdk</groupId>
+              <artifactId>heroku-maven-plugin</artifactId>
+              <version>2.0.3</version>
+              <configuration>
+                  <appName>expense-tracker25292</appName>
+                  <includeTarget>false</includeTarget>
+                  <jdkVersion>1.8</jdkVersion>
+              </configuration>
+          </plugin>
 		</plugins>
 	</build>
 
