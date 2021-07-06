@@ -17,6 +17,7 @@ import com.expense.service.JwtUserDetailsService;
 import com.nci.jwt.JwtTokenUtil;
 import com.nci.model.JwtRequest;
 import com.nci.model.JwtResponse;
+import com.nci.model.UserDTO;
 
 @RestController
 @CrossOrigin
@@ -35,6 +36,11 @@ public class JwtAuthenticationController {
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new JwtResponse(token));
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.save(user));
 	}
 
 	private void authenticate(String username, String password) throws Exception {

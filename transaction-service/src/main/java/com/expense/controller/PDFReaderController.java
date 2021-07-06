@@ -1,5 +1,9 @@
 package com.expense.controller;
 
+import static com.expense.exception.ErrorCode.GENERAL_ERROR;
+import static com.expense.exception.ErrorCode.USER_VALIDATION_FAIL;
+import static com.nci.constants.Messages.REQ_FORWARD_ATTR_NAME;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +12,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +25,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.exceptions.TemplateInputException;
+
+import com.expense.exception.NCIException;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.exceptions.TemplateInputException;
@@ -42,7 +55,7 @@ public class PDFReaderController {
 			@RequestParam(value = "phoneNumber", required = true) String phoneNumber) throws Exception {
 		List<PdfDetails> displayDetailsRequest = new ArrayList<PdfDetails>();
 		List<String> categoryList = transactionService.getCategories(phoneNumber);
-			displayDetailsRequest = transactionService.readPdfFile(file);
+		displayDetailsRequest = transactionService.readPdfFile(file);
 
 		model.addAttribute("displayDetailsRequest", displayDetailsRequest);
 		model.addAttribute("categoryList", categoryList);
@@ -131,12 +144,13 @@ public class PDFReaderController {
 	public String login() {
 		return "login";
 	}
-	
+
 	// Login form
-		@GetMapping("/demo")
-		public String demo() {
-			return "demo";
-		}
+	@ExceptionHandler(TemplateInputException.class)
+	@GetMapping("/demo")
+	public String demo() {
+		return "demo";
+	}
 
 	// Login form with error
 	@GetMapping("/addOther")
@@ -160,5 +174,25 @@ public class PDFReaderController {
 	 * 
 	 * }
 	 */
+
+	// FIXME Remove from here and create seperate controller
+	@RequestMapping(path = "/error", method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
+			RequestMethod.DELETE })
+	public void handleInvalidUri(HttpServletRequest req) {
+		// LOGGER.traceEntry(req.getMethod() + " " + req.getRequestURI());
+		throw new NCIException(GENERAL_ERROR, "An error occured while processing request");
+	}
+
+	@RequestMapping(path = "/forbidden", method = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
+			RequestMethod.DELETE })
+	public void handleForbidden(HttpServletRequest req) {
+		String msg = "Access denied on [" + req.getMethod() + " " + req.getAttribute(REQ_FORWARD_ATTR_NAME) + "]";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			msg = msg + " for [" + auth.getName() + "]";
+		}
+		// LOGGER.warn(msg);
+		throw new NCIException(USER_VALIDATION_FAIL, msg);
+	}
 
 }

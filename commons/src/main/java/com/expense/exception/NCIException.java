@@ -18,6 +18,12 @@ public class NCIException extends RuntimeException
 		this.errorCode = errorCode;
 		this.errorMsg = message;
 	}
+	
+	public NCIException( ErrorCode errorCode, String message) {
+		super(message);
+		this.errorCode = errorCode;
+		this.errorMsg = message;
+	}
 
 	public ErrorCode getErrorCode() {
 		return errorCode;

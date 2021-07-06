@@ -8,6 +8,8 @@ import java.util.function.Supplier;
  *
  */
 public interface Messages {
+	
+	String REQ_FORWARD_ATTR_NAME = "javax.servlet.forward.request_uri";
 
 	String ERR_CREATING_DATABASE = "Error creating database [%s]";
 
